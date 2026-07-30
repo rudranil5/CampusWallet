@@ -1,14 +1,15 @@
 const express = require("express");
 const database = require("mysql2");
+require("dotenv").config();
 const app = express();
 
 app.use(express.json());
 app.use(express.static("public"));
 const student_db = database.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root",
-  database: "projects2"
+  host: process.env.DHost,
+  user: process.env.DUsername,
+  password: process.env.DPassword,
+  database: process.env.Database
 });
 /*
  student_db.query(
