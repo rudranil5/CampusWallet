@@ -114,10 +114,12 @@ window.onload = function(){
         else if (item.status=='open'){
             status='Open';
             status2='🟢';
+            show_Menu();
         }
         else{
             console.log("Some Error Occured");
             console.log(item.status);
+            alert("Server Error");
             
         }
         })
@@ -127,8 +129,9 @@ window.onload = function(){
     })
         .catch(err=>console.log(err));
     
+};
 
-
+window.show_Menu =function(){
 fetch("/showMenu")
 .then(res => res.json())
 .then(data => {
@@ -150,7 +153,7 @@ const tdQty = document.createElement("td");
 const qtyInput = document.createElement("input");
 qtyInput.type = "number";
 qtyInput.min = "1";
-qtyInput.id = `qty-${item.id}`;
+qtyInput.id = `qty-${item.items}`;
 tdQty.appendChild(qtyInput);
 
 const tdTime = document.createElement("td");
@@ -164,7 +167,7 @@ const orderBtn = document.createElement("button");
 orderBtn.textContent = "ORDER";
 
 orderBtn.addEventListener("click", ()=>{
-orderItem(item.items, item.price, `qty-${item.id}`);
+orderItem(item.items, item.price, `qty-${item.items}`);
 });
 
 tdBtn.appendChild(orderBtn);
@@ -186,6 +189,7 @@ tableBody.appendChild(row);
 
 
 function orderItem(menu_item, menu_cost, menu_id){
+    console.log("Selected:"+menu_id);
 const randomString = Math.random().toString(36).substring(2, 10);
 console.log(randomString); 
 let quant = document.getElementById(menu_id).value;
