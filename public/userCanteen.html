@@ -45,7 +45,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     <B> Call:</B>
      9110098732
     </div>
-    <a href="student.html" class="back-link">&lt;Back</a>
+    <a href="User.html" class="back-link">&lt;Back</a>
 </div>
 
 <!-- Right Panel -->
@@ -67,7 +67,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <div>
 <span>Canteen Status</span>
 </div>
-<button class="open-btn">#</button>
+<button class="open-btn" id="canteen-status"></button>
 </div>
 
 </div>
@@ -97,6 +97,37 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <script>
 
 window.onload = function(){
+
+    let status='';
+    let status2='';
+    let serviceProvider='canteen';
+    fetch ('/statusGet?service=canteen')
+    .then(res=>res.json())
+    .then(data=>{
+        data.forEach(item=>{
+            console.log(data);
+        if (item.status=='closed'){
+            status= 'Closed';
+            status2='🔴';
+            document.getElementById('studentTable').innerHTML=("<HR color='black'><BR><h1 align='center' >CANTEEN<BR>IS<BR>NOW<BR>CLOSED</h1><br><HR height='10px'>");
+        }
+        else if (item.status=='open'){
+            status='Open';
+            status2='🟢';
+        }
+        else{
+            console.log("Some Error Occured");
+            console.log(item.status);
+            
+        }
+        })
+        document.getElementById('canteen-status').innerHTML=(`${status2} <b>${status}</b>`);
+        
+        
+    })
+        .catch(err=>console.log(err));
+    
+
 
 fetch("/showMenu")
 .then(res => res.json())
@@ -181,6 +212,8 @@ alert("Order Sent ✅");
 .catch(err=>console.log("Order error:",err));
 
 }
+
+
 
 </script>
 
