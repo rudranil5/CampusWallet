@@ -17,7 +17,23 @@ window.onload=function(){
             const ttime=document.createElement("td");
             ttime.textContent=item.time;
             const tstatus=document.createElement("td");
-            tstatus.textContent=item.status;
+            const statusButton=document.createElement("select");
+            const options_Status=['cancelled','accepted','served','preparing','pending'];
+            options_Status.forEach(status=>{
+                let option=document.createElement("option");
+                option.value=status;
+                option.textContent=status;
+                if (status==item.status)
+                { option.selected=true;}
+                statusButton.appendChild(option);
+            })
+            
+            statusButton.addEventListener("change",()=>{
+                console.log(statusButton.value);
+                //const newStatus=statusButton.value;
+                change_order_status(item.id,item.item,statusButton.value);
+            })
+            tstatus.appendChild(statusButton);
 
             row.appendChild(tuid);
             row.appendChild(titems);
@@ -79,4 +95,23 @@ window.statusGet =function(){
         .catch(err=>console.log(err));
     
 
+}
+
+window.change_order_status = function(customerId,dishName,newStatus){
+    const data={
+        orderer:customerId,
+        dish:dishName,
+        newStatus:newStatus
+    };
+    console.log(data);
+
+    fetch ("/orderStatusChange",{
+        method:"PUT",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    })
+    .then (res=>res.json())
+    .then (data=>{
+        console.log (data);
+    })
 }
