@@ -559,7 +559,7 @@ app.post("/recordTransaction",(req,res)=>{
 
 app.get("/statusGet",(req,res)=>{
   const serviceProvider=req.query.service;
-  console.log("Status requested : ",serviceProvider);
+  console.log("Status requested of: ",serviceProvider);
   student_db.query(`select status from services where name='${serviceProvider}'`,(err,data)=>{
     if(err){console.log(`error while checking status of ${serviceProvider} : `+err)}
     else{ return res.json(data);}
