@@ -579,6 +579,14 @@ app.put("/statusChange",(req,res)=>{
     });
 });
 
+app.put("/orderStatusChange",(req,res)=>{
+  let {orderer,dish,newStatus}=req.body;
+  student_db.query("update orders set status=? where id=? and item=?;",[newStatus,orderer,dish],(err,data)=>{
+    if (err){console.log("Updation of order failed due to "+err);}
+    else{return res.json("Status of item Changed");}
+  });
+})
+
 
 app.post("/save",(req,res)=>{
     console.log("FUcci");
@@ -592,6 +600,7 @@ app.post("/save",(req,res)=>{
     });
     for (let i=0;i<itemList.length;i++){
         let Item=itemList[i];
+        //let cost=itemList[i];
         student_db.query("insert into menu (items,cost) values (?,?)",[Item,cost],(err,data)=>{
         if(err)
         {
@@ -612,10 +621,10 @@ app.get("/showMenu",(req,res)=>{
         if (err){console.log("Error : ",err);}
         else{
 
-
+            console.log("THE MENU TODAY-"+JSON.stringify(data));
             return res.json(data);
         }
-        console.log(data);
+        
     })
     
 })
@@ -661,7 +670,7 @@ console.log(data);
     }
     else
     {
-      console.log(result)
+      console.log("Result of order: ",+result);
        return res.json(result);
     }
   })
