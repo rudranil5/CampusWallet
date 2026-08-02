@@ -9,7 +9,7 @@ const student_db = database.createConnection({
   host: process.env.DHost,
   user: process.env.DUsername,
   password: process.env.DPassword,
-  database: process.env.Database
+  database: process.env.DDatabase
 });
 /*
  student_db.query(
@@ -535,6 +535,50 @@ app.post("/Librarytransactionhistory",(req,res)=>{
 }
 ) 
 
+app.post("/recordTransaction",(req,res)=>{
+    const {TrData}= req.body
+    const Amount=TrData.Amount;
+    const Sender=TrData.Sender;
+    const Reciever=TrData.Reciever;
+    const Mode=TrData.Mode;
+    const Remarks=TrData.Remarks;
+    if (Amount.length!=null || Sender.length!=null || Reciever.length!=null){
+
+        student_db.query("insert into transactions (Amount,Sender,Reciever,Mode,Remarks) values (?,?,?,?,?)",[Amount,Sender,Reciever,Mode,Remarks],(err,data)=>{
+            if(err){console.log("Error: ",err);}
+            else{
+                console.log("Success");
+                return res.json("Payment Successfully Updated");
+            }
+        })
+        }
+    else {return res.json("An Error Occured !!! Please Try Again ")}
+})
+
+// down changed r
+
+app.get("/statusGet",(req,res)=>{
+  const serviceProvider=req.query.service;
+  console.log("Status requested : ",serviceProvider);
+  student_db.query(`select status from services where name='${serviceProvider}'`,(err,data)=>{
+    if(err){console.log(`error while checking status of ${serviceProvider} : `+err)}
+    else{ return res.json(data);}
+  });
+})
+
+app.put("/statusChange",(req,res)=>{
+  let {service}=req.body;
+  student_db.query(`update services 
+    set status= case
+    when status='open' then 'closed'
+    else 'open'
+    end
+    where name=?`,[service],(err,data)=>{
+      if(err){console.log(`While changing ${service} status : `+err);}
+      else{return res.json({messege:"success"}) ;}
+    });
+});
+
 
 app.post("/save",(req,res)=>{
     console.log("FUcci");
@@ -560,25 +604,6 @@ app.post("/save",(req,res)=>{
 }
 
 )
-app.post("/recordTransaction",(req,res)=>{
-    const {TrData}= req.body
-    const Amount=TrData.Amount;
-    const Sender=TrData.Sender;
-    const Reciever=TrData.Reciever;
-    const Mode=TrData.Mode;
-    const Remarks=TrData.Remarks;
-    if (Amount.length!=null || Sender.length!=null || Reciever.length!=null){
-
-        student_db.query("insert into transactions (Amount,Sender,Reciever,Mode,Remarks) values (?,?,?,?,?)",[Amount,Sender,Reciever,Mode,Remarks],(err,data)=>{
-            if(err){console.log("Error: ",err);}
-            else{
-                console.log("Success");
-                return res.json("Payment Successfully Updated");
-            }
-        })
-        }
-    else {return res.json("An Error Occured !!! Please Try Again ")}
-})
 
 
 app.get("/showMenu",(req,res)=>{
@@ -595,7 +620,7 @@ app.get("/showMenu",(req,res)=>{
     
 })
 
-// below showorders history is done by me;
+// below showorders history is changed;
 
 app.get("/showOrders",(req,res)=>{
   student_db.query("select id,item,quantity,time_format(time,'%h:%i %p') as time,status from orders ",(err,data)=>{

@@ -4,10 +4,9 @@ window.onload=function(){
     .then(data => {
     
         const tableBody=document.querySelector(".bookings-table tbody");
-
+        console.log("Here is - ",data);
         data.forEach(item =>{
             const row= document.createElement("tr");
-            console.log("Here is - ",data);
             
             const tuid=document.createElement("td");
             tuid.textContent=item.id;
@@ -30,6 +29,48 @@ window.onload=function(){
         });
     })
         .catch(err=>console.log("Cant show orders due to - ",err));
+
+    //Below is to show canteen service status
+    
+    let status='';
+    let status2='';
+    let serviceProvider='canteen';
+    fetch ('/statusGet?service=canteen')
+    .then(res=>res.json())
+    .then(data=>{
+        data.forEach(item=>{
+            console.log(data);
+        if (item.status=='closed'){
+            status= 'Closed';
+            status2='🔴';
+        }
+        else if (item.status=='open'){
+            status='Open';
+            status2='🟢';
+        }
+        else{
+            console.log("Some Error Occured");
+            console.log(item.status);
+            
+        }
+        })
+        document.getElementById('serviceStatus').innerHTML=(`<b>Canteen is ${status}</b>`);
+        document.getElementById('serviceStatus2').innerHTML=(`${status2}`);
+        
+    })
+        .catch(err=>console.log(err));
+    
+
         
         
+};
+
+window.statusChange =function(){
+    fetch("/statusChange",{
+        method:'PUT',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({service:'canteen'})
+    })
+    //document.getElementById('serviceStatus').innerHTML=(`<b>Canteen is ${status}</b>`);
+    //document.getElementById('serviceStatus2').innerHTML=(`${status2}`);
 };

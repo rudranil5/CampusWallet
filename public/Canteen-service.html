@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/128/14311/14311977.png">
     <title>Campus Wallet - Canteen Dashboard</title>
     <link rel="stylesheet" href="Canteen-service.css">
 </head>
@@ -50,14 +51,16 @@
 
                 
                 <div class="menu-items">
+                    <button class="menu-item" onclick="statusChange()">
+                        <span class="menu-icon" id="serviceStatus2">🟢</span>
+                        <span id="serviceStatus" ><b>Canteen is Open</b></span>
+                    </button>
+
                     <a href="upload_menu.html"><button class="menu-item">
                         <span class="menu-icon">☁️</span>
                         <span>Upload Menu</span>
                     </button></a>
-                    <button class="menu-item">
-                        <span class="menu-icon">⏰</span>
-                        <span>Set Active Time</span>
-                    </button>
+                    
                     <button class="menu-item">
                         <span class="menu-icon">🕐</span>
                         <span>Transaction History</span>
