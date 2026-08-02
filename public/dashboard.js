@@ -32,6 +32,24 @@ window.onload=function(){
 
     //Below is to show canteen service status
     
+    
+    statusGet();
+        
+        
+};
+
+window.statusChange =function(){
+    fetch("/statusChange",{
+        method:'PUT',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({service:'canteen'})
+    })
+    .then(()=>{
+        statusGet();
+    })
+};
+
+window.statusGet =function(){
     let status='';
     let status2='';
     let serviceProvider='canteen';
@@ -61,16 +79,4 @@ window.onload=function(){
         .catch(err=>console.log(err));
     
 
-        
-        
-};
-
-window.statusChange =function(){
-    fetch("/statusChange",{
-        method:'PUT',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({service:'canteen'})
-    })
-    //document.getElementById('serviceStatus').innerHTML=(`<b>Canteen is ${status}</b>`);
-    //document.getElementById('serviceStatus2').innerHTML=(`${status2}`);
-};
+}
