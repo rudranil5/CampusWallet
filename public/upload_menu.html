@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/128/14311/14311977.png">
     <meta charset="UTF-8">
     <title>Upload Menu</title>
+    <!--img src="https://cdn-icons-png.flaticon.com/128/13505/13505959.png"/-->
     <link rel="stylesheet" href="uploadMenu.css">
 </head>
 <body>
@@ -171,7 +173,7 @@
     const publish=document.getElementById("publish");
     publish.addEventListener("click",save);
     function save(){
-        fetch("http://localhost:3000/save",{
+        fetch("/save",{
             method:"POST",
             headers:{"Content-Type":"application/json"},
             body:JSON.stringify({itemList:itemList})
