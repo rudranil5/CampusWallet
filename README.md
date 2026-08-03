@@ -5,7 +5,7 @@
 ### This Does Not Contain The Triggers Required. However Send a request to telegram for details about triggers; as the behavior will change from platform to platform. 
 
 
- A CampusWallet.Mysql file is also available but that is my sql specific 
+ #### A CampusWallet.Mysql file is also available but that is my sql specific 
 
 show DATABASES;
 use CampusWallet;
