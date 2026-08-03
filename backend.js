@@ -12,7 +12,9 @@ const student_db = database.createConnection({
   database: process.env.DDatabase,
   port:process.env.PORT,
   ssl: {
-        rejectUnauthorized: true
+        ca: fs.readFileSync(
+            path.join(__dirname, "isrgrootx1.pem")
+        )
     }
 
 });
