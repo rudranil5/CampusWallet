@@ -2,13 +2,11 @@
 
 
 ## Required database Tables  :::::::::::::::::::::::::::::
-{ This Does Not Contain The Triggers Required. However Send a request to telegram for details about triggers; as the behavior will change from platform to platform. }
+### This Does Not Contain The Triggers Required. However Send a request to telegram for details about triggers; as the behavior will change from platform to platform. 
 
 
-[ A CampusWallet.Mysql file is also available but that is my sql specific ]
+ #### A CampusWallet.Mysql file is also available but that is my sql specific 
 
-/* Enter "USE {database};" to start exploring your data.
-   Press Ctrl + I to try out AI-generated SQL queries or SQL rewrite using Chat2Query. */
 show DATABASES;
 use CampusWallet;
 CREATE DATABASE `CampusWallet`;
