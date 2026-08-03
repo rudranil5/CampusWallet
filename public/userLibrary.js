@@ -6,7 +6,7 @@ window.onload = function ()
     window.location.href = "login.html";
     return;
   }
-  fetch("http://localhost:3000/Userdetails",{
+  fetch("/Userdetails",{
     method:"POST",
     headers: { "Content-Type": "application/json" },
     body:JSON.stringify({id:id})
@@ -46,7 +46,7 @@ function set_time_reminder()
         book_name:book_name,
         expected_date:expected_date
     };
-    fetch("http://localhost:3000/setreminder",
+    fetch("/setreminder",
         {
             method:"POST",
             headers: { "Content-Type": "application/json" },

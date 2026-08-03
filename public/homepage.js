@@ -1,4 +1,4 @@
-fetch("http://localhost:3000/notifyhistory")
+fetch("/notifyhistory")
 .then(res => res.json())
 .then(data=>
 {

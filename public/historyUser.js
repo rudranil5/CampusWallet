@@ -7,7 +7,7 @@ window.onload = function ()
     window.location.href = "login.html";
     return;
     }
-    fetch("http://localhost:3000/usertransactionhistory",{
+    fetch("/usertransactionhistory",{
         method:"POST",
         headers: { "Content-Type": "application/json" },
         body:JSON.stringify({id:id})

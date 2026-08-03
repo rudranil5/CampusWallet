@@ -10,7 +10,7 @@ window.onload = function ()
     window.location.href = "login.html";
     return;
   }
-  fetch("http://localhost:3000/Userdetails",{
+  fetch("/Userdetails",{
     method:"POST",
     headers: { "Content-Type": "application/json" },
     body:JSON.stringify({id:id})
@@ -25,7 +25,7 @@ window.onload = function ()
     document.getElementById("show_id").textContent = firstname +" " + lastname;
   }
   )
-  fetch("http://localhost:3000/usertransactionhistory",{
+  fetch("/usertransactionhistory",{
         method:"POST",
         headers: { "Content-Type": "application/json" },
         body:JSON.stringify({id:id})
@@ -41,7 +41,7 @@ window.onload = function ()
              sessionStorage.setItem("balanceObject",JSON.stringify(balance));
         console.log(balance);
     });
-  fetch("http://localhost:3000/seenotification",{
+  fetch("/seenotification",{
   method:"POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({id:id})
@@ -79,7 +79,7 @@ div.innerHTML = "<h3>From Library</h3><p>From You have to Return book Today :<p>
   });
 
 });
-  fetch("http://localhost:3000/seeprintingstatus",{
+  fetch("/seeprintingstatus",{
   method:"POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({id:id})
@@ -156,7 +156,7 @@ function addNotification(message) {
 }
 function shownofication() {
 
-    fetch("http://localhost:3000/seenotification", {
+    fetch("/seenotification", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: id })
@@ -203,7 +203,7 @@ function shownofication() {
     });
 
 
-    fetch("http://localhost:3000/seeprintingstatus", {
+    fetch("/seeprintingstatus", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: id })

@@ -7,7 +7,7 @@ window.onload = function ()
     window.location.href = "login.html";
     return;
   }
-  fetch("http://localhost:3000/Userdetails",{
+  fetch("/Userdetails",{
     method:"POST",
     headers: { "Content-Type": "application/json" },
     body:JSON.stringify({id:id})
@@ -22,7 +22,7 @@ window.onload = function ()
     document.getElementById("show_id").textContent = firstname +" " + lastname;
   }
   )
-  fetch("http://localhost:3000/activetime")
+  fetch("/activetime")
   .then(res=>res.json())
   .then(result=>{
     if(result.status == 1)
@@ -60,7 +60,7 @@ function senddoc()
     id:id,
     massage:massage
   }
-    fetch("http://localhost:3000/senddocuments",{
+    fetch("/senddocuments",{
       method:"POST",
       headers: { "Content-Type": "application/json" },
       body:JSON.stringify(data)
