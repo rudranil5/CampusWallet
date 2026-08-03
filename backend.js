@@ -1,5 +1,7 @@
 const express = require("express");
 const database = require("mysql2");
+const fs = require("fs");
+const path = require("path");
 require("dotenv").config();
 const app = express();
 
