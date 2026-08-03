@@ -676,6 +676,10 @@ console.log(data);
   })
 })
 
+app.get("/",(req,res)=>{
+	res.redirect("homepage.html");
+});
+
 
 let port = process.env.port || 3000;
 app.listen(port, () => console.log("Server link : http://localhost:"+port+"/homepage.html"));
