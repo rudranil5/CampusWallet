@@ -9,7 +9,12 @@ const student_db = database.createConnection({
   host: process.env.DHost,
   user: process.env.DUsername,
   password: process.env.DPassword,
-  database: process.env.DDatabase
+  database: process.env.DDatabase,
+  port:process.env.PORT,
+  ssl: {
+        rejectUnauthorized: true
+    }
+
 });
 /*
  student_db.query(
@@ -678,5 +683,5 @@ console.log(data);
 
 app.use(express.static(path.join(__dirname, "public")));
 
-let port = process.env.port || 3000;
-app.listen(port, () => console.log(`Server listening on :${port}`));
+let PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server listening on :${port}`));
