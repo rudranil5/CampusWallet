@@ -2,7 +2,7 @@ const tableBody = document.querySelector("#studentTable tbody");
 
 window.onload = function ()
 {
-    fetch("http://localhost:3000/notifyhistory")
+    fetch("/notifyhistory")
     .then(res => res.json())
     .then(data =>
     {

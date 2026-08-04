@@ -186,7 +186,7 @@ app.post("/Librariandetails",(req,res)=>{
 
 // * Removing the student list who already submitted the fine
 app.get("/removelist", (req, res) => {
-  const sql = "SELECT roll_number from library where notified = 0 ";
+  const sql = "SELECT `Roll Number` from library where notified = 0 ";
 
   student_db.query(sql,(err, result) => {
     if (err) {
@@ -218,7 +218,7 @@ app.get("/showstudentlist", (req, res) => {
 
 app.post("/finesubmitted",(req,res)=>{
   const {roll} = req.body;
-  let queary = "update library set notified = 0 where roll_number = ? ;"
+  let queary = "update library set notified = 0 where `Roll Number` = ? ;"
   student_db.query(queary,[roll],(err,result)=>
   {
     if(err)
@@ -247,7 +247,7 @@ app.post("/notify",(req,res)=>{
     fdate} = req.body;
   console.log(req.body);
   let notified = 1;
-  student_db.query("INSERT INTO library(roll_number,name,library_id,book_name,author_name,fine,librarian_id,return_date,notified,notification_sent_date) VALUES(?,?,?,?,?,?,?,?,?,CURDATE())",[frollnum,fullname,cardnumber,book,author,ffine,id,fdate,notified],(err,data)=>{
+  student_db.query("INSERT INTO library(`Roll Number`,name,library_id,book_name,author_name,fine,librarian_id,return_date,notified,notification_sent_date) VALUES(?,?,?,?,?,?,?,?,?,CURDATE())",[frollnum,fullname,cardnumber,book,author,ffine,id,fdate,notified],(err,data)=>{
     if(err)
     {
       console.log("Error:"+err);

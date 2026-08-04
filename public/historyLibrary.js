@@ -8,7 +8,7 @@ window.onload = function ()
     return;
     }
     let Sender = "Library";
-    fetch("http://localhost:3000/Librarytransactionhistory",
+    fetch("/Librarytransactionhistory",
         {
             method:"POST",
             headers: { "Content-Type": "application/json" },
