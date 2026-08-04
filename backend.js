@@ -61,12 +61,6 @@ app.post("/register", (req, res) => {
       let val = foccupation[0]+foccupation[1]+"00"+nid; 
       let value = val.toUpperCase();
       console.log(value);
-    });
-  } 
-  else
-    {
-      let value = fid;
-    } 
       student_db.query(
     "INSERT INTO details(firstname,lastname,phone_number,password,occupation,id) VALUES (?,?,?,?,?,?)",
     [first, last, phone_number, fpassword, foccupation, value],
@@ -78,7 +72,25 @@ app.post("/register", (req, res) => {
 
       return res.json({ message: "Successfully saved in database" });
     }
-  );
+  )
+    });
+  } 
+  else
+    {
+      let value = fid;
+     
+      student_db.query(
+    "INSERT INTO details(firstname,lastname,phone_number,password,occupation,id) VALUES (?,?,?,?,?,?)",
+    [first, last, phone_number, fpassword, foccupation, value],
+   (err, result) => {
+      if (err) {
+        console.log(err);
+        return res.json({ message: "Database error" });
+      }
+
+      return res.json({ message: "Successfully saved in database" });
+    }
+  )};
     
     
 });
