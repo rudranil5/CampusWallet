@@ -1,7 +1,7 @@
 let id = "123";
-let firstname = "";
-let lastname = "";
-let phone_number = "";
+let firstname = "r";
+let lastname = "k";
+let phone_number = "809";
 
 window.onload = function ()
 {
