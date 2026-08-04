@@ -49,7 +49,7 @@ app.post("/register", (req, res) => {
   let { first,last,phone_number,fpassword,foccupation,fid } = req.body;
   console.log("Received:", first,last,phone_number,fpassword,foccupation,fid);
   if (fid == "-1")
-  {
+  { //there in no serial_no in details. however the concept is remaining, currently vendor gets id from frontend phon no
     student_db.query(("SELECT max(serial_no) as max_serial FROM details"),(err,rest)=>
     {
       if(err)

@@ -85,7 +85,7 @@ if ( occupation_choose == "Student" || occupation_choose == "Teacher")
 }
 else
 {
-   id= -1;
+  id= phon_num;
 }
 const data = 
 {
