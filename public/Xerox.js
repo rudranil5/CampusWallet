@@ -1,7 +1,7 @@
 let time = 0;
 window.onload = function ()
   {
-    fetch("http://localhost:3000/openstatus")
+    fetch("/openstatus")
     .then(res=>res.json())
     .then(massage=>{
         if(massage[0].xerox == 1)
@@ -23,7 +23,7 @@ window.onload = function ()
     window.location.href = "login.html";
     return;
   }
-  fetch("http://localhost:3000/Xeroxdetails",{
+  fetch("/Xeroxdetails",{
     method:"POST",
     headers: { "Content-Type": "application/json" },
     body:JSON.stringify({id:id})
@@ -41,7 +41,7 @@ window.onload = function ()
 
   }
   )
-    fetch("http://localhost:3000/showprintlist")
+    fetch("/showprintlist")
   .then(res=>res.json())
   .then(data =>
   {
@@ -89,7 +89,7 @@ closeBtn.addEventListener("click", () => {
 });
 function printed(roll,btn)
 {
-    fetch("http://localhost:3000/printed",{
+    fetch("/printed",{
         method:"POST",
         headers: { "Content-Type": "application/json" },
         body:JSON.stringify({roll:roll})
@@ -123,7 +123,7 @@ else if(time == 1)
     status_color = "red";
     status_word = "⏰ Closed"
 }
-    fetch("http://localhost:3000/settimexerox",{
+    fetch("/settimexerox",{
         method:"POST",
         headers: { "Content-Type": "application/json" },
         body:JSON.stringify({time:time})
@@ -148,7 +148,7 @@ remove_button.addEventListener("click",remove_func);
 function remove_func()
 {
     console.log("error");
-    fetch("http://localhost:3000/removeprinted")
+    fetch("/removeprinted")
     .then(res=>res.json())
     .then(data=>
     {

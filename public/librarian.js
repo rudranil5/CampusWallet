@@ -9,7 +9,7 @@ window.onload = function ()
     window.location.href = "login.html";
     return;
   }
-  fetch("http://localhost:3000/Librariandetails",{
+  fetch("/Librariandetails",{
     method:"POST",
     headers: { "Content-Type": "application/json" },
     body:JSON.stringify({id:id})
@@ -27,7 +27,7 @@ window.onload = function ()
 
   }
   )
-  fetch("http://localhost:3000/showstudentlist")
+  fetch("/showstudentlist")
   .then(res=>res.json())
   .then(data =>
   {
@@ -80,7 +80,7 @@ updateBtn.addEventListener("click", remove);
 
 function remove()
 {
-    fetch("http://localhost:3000/removelist",)
+    fetch("/removelist",)
         .then(res => res.json())
         .then(data => {
 
@@ -114,7 +114,7 @@ function remove()
 function fine_submitted(roll,btn)
 {
     
-      fetch("http://localhost:3000/finesubmitted",{
+      fetch("/finesubmitted",{
     method:"POST",
     headers: { "Content-Type": "application/json" },
     body:JSON.stringify({roll:roll})
