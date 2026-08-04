@@ -8,7 +8,7 @@ window.onload = function ()
     return;
     }
     let Sender = "Xerox";
-    fetch("http://localhost:3000/Xeroxtransactionhistory",
+    fetch("/Xeroxtransactionhistory",
         {
             method:"POST",
             headers: { "Content-Type": "application/json" },
