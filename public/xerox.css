@@ -266,7 +266,7 @@ td
 #Profile_image
 {
     height: 200px;
-    background-image: url(profile_pic.jpeg);
+    background-image: url(profile_pic.jpg);
     background-size:cover;
     background-position:center;
     background-repeat: no-repeat;

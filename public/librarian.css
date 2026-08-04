@@ -176,7 +176,7 @@ a:hover
 }
 #image_container
 {
-    background-image: url(library-pic.jpeg);
+    background-image: url(library-pic.jpg);
     height: 250px;
     background-size:cover;
     background-position:center;
@@ -224,7 +224,7 @@ a:hover
 #Profile_image
 {
     height: 200px;
-    background-image: url(profile_pic.jpeg);
+    background-image: url(profile_pic.jpg);
     background-size:cover;
     background-position:center;
     background-repeat: no-repeat;
