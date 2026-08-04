@@ -56,8 +56,8 @@ app.post("/register", (req, res) => {
       {
         console.log(err);
       }
-      max = rest[0].max_serial;
-      nid = String(max + 1);
+      let max = rest[0].max_serial;
+      let nid = String(max + 1);
       let val = foccupation[0]+foccupation[1]+"00"+nid; 
       let value = val.toUpperCase();
       console.log(value);
@@ -65,7 +65,7 @@ app.post("/register", (req, res) => {
   } 
   else
     {
-      value = fid;
+      let value = fid;
     } 
       student_db.query(
     "INSERT INTO details(firstname,lastname,phone_number,password,occupation,id) VALUES (?,?,?,?,?,?)",
