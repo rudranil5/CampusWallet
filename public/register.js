@@ -75,7 +75,7 @@ let length = phone_num.length;
 const unique_id_default = document.getElementById("default_visible");
 const User_id_web = document.getElementById("User_id");
  unique_id_default.style.visibility = "hidden";
-let id = "phone_num";
+let id = "";
 if ( occupation_choose == "Student" || occupation_choose == "Teacher")
 {
   if(User_id_web == "")
