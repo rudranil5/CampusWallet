@@ -4,6 +4,7 @@ const fs = require("fs");
 const path = require("path");
 require("dotenv").config();
 const app = express();
+const isProd = process.env.NODE_ENV === "production";
 
 app.use(express.json());
 app.use(express.static("public"));
@@ -12,12 +13,13 @@ const student_db = database.createConnection({
   user: process.env.DUsername,
   password: process.env.DPassword,
   database: process.env.DDatabase,
-  port:process.env.PORT,
-  ssl: {
+  port:process.env.DPORT,
+   ...(isProd && {ssl: {
         ca: fs.readFileSync(
             path.join(__dirname, "isrgrootx1.pem")
         )
-    }
+        }
+      })
 
 });
 /*
