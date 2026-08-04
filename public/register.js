@@ -5,6 +5,7 @@ const unique_id = document.getElementById("default");
 const unique_id_default = document.getElementById("default_visible");
 const User_id_web = document.getElementById("User_id");
 const occupation_student = document.getElementById("student_occupation");
+const unique_num=document.getElementById("unique_number");
 User_id_web.textContent = "Your Id"
 occupation_choose.addEventListener("change",
 function()
@@ -26,6 +27,7 @@ let length = phoneVal.length;
 let id="";
    if(this.value == "Student")
    {
+     unique_num.required=true;
      unique_id_disable.disabled = true;
        roll_disable.selected = true;
        if(id == "")
@@ -36,6 +38,7 @@ let id="";
    }
    else if (this.value == "Teacher")
    {
+     unique_num.required=true;
      roll_disable.disabled = true;
       unique_id_disable.selected = true;
    }
@@ -43,6 +46,7 @@ let id="";
    {
       if(firstname.value.length != 0 && lastname.value.length!=0 && length!=0)
       {
+        
         roll_disable.disabled = true;
         unique_id_disable.disabled = true;
         unique_id.style.visibility = "hidden";
@@ -71,7 +75,7 @@ let length = phone_num.length;
 const unique_id_default = document.getElementById("default_visible");
 const User_id_web = document.getElementById("User_id");
  unique_id_default.style.visibility = "hidden";
-let id = "";
+let id = "phone_num";
 if ( occupation_choose == "Student" || occupation_choose == "Teacher")
 {
   if(User_id_web == "")
@@ -81,11 +85,12 @@ if ( occupation_choose == "Student" || occupation_choose == "Teacher")
     User_id_web.textContent ="If you dont have makaut roll number enter you library card number";
   }
  
-  id = document.getElementById("unique_number").value;
+   id = document.getElementById("unique_number").value;
 }
 else
 {
-  id= phon_num;
+  
+   id= phone_num;
 }
 const data = 
 {
@@ -109,7 +114,7 @@ const data =
     } catch (error) {
         console.error("Error:", error);
     }
-    if(firstname.length != 0 && lastname.length !=0 && length != 0 && password.length != 0 && id != 0)
+    if(firstname.length != 0 && lastname.length !=0  && password.length != 0 && id != 0)
     {
       window.location.href="/login.html";
     }
