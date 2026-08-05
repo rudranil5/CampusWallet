@@ -117,6 +117,9 @@
 
 <script>
     window.onload = function(){
+        id = JSON.parse(sessionStorage.getItem("object"));
+        if (!id) {
+            window.location.href = "login.html";}
         let itemList=[];
         fetch("/showmenu")
         .then(res=>res.json())

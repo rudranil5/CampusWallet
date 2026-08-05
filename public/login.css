@@ -15,7 +15,7 @@ body{
 
 .login-card{
     width:1000px;
-    height:400px;
+    height:500px;
     background:white;
     border-radius:20px;
     display:flex;
@@ -55,7 +55,9 @@ body{
 }
 
 .forgot{
-    text-align:right;
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
     width:85%;
     color:#777;
     margin-bottom:20px;

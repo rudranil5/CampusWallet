@@ -203,6 +203,9 @@ function orderItem(menu_item, menu_cost, menu_id){
         console.log(randomString); 
         let quant = document.getElementById(menu_id).value;
         let Uid = JSON.parse(sessionStorage.getItem("object"));
+        if (!Uid){
+            window.location.href="login.html";
+        }
         const data = {
         uid:Uid,
         menuitem: menu_item,

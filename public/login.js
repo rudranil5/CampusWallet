@@ -39,6 +39,7 @@ async function sendData( )
             sessionStorage.setItem("object",JSON.stringify(result.id));
             window.location.href = "/"+result.redirect;
         }
+        else{alert("Invalid Login Credentials");}
     } catch (error) {
         console.error("Error:", error);
     }

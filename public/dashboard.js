@@ -56,6 +56,9 @@ window.onload=function(){
 
 window.statusChange =function(){
     let Uid = JSON.parse(sessionStorage.getItem("object"));
+    if (!Uid) {
+    window.location.href = "login.html";}
+
     fetch("/statusChange",{
         method:'PUT',
         headers: {'Content-Type':'application/json'},
