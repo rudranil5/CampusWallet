@@ -1,10 +1,10 @@
 let time = 0;
 window.onload = function ()
   {
-    fetch("/openstatus")
+    fetch("/statusGet?service=xerox")
     .then(res=>res.json())
-    .then(massage=>{
-        if(massage[0].xerox == 1)
+    .then(data=>{
+        if(data[0].xerox == 'open')
         {
               settime.style.backgroundColor= "Green";
               settime.innerText = "⏰ Open";
@@ -111,6 +111,10 @@ let status_word = "⏰ Closed"
 
 function set()
 {
+    let Uid = JSON.parse(sessionStorage.getItem("object"));
+    if (!Uid) {
+    window.location.href = "login.html";}
+    else{
     if(time == 0)
 {
     time = 1;
@@ -123,10 +127,10 @@ else if(time == 1)
     status_color = "red";
     status_word = "⏰ Closed"
 }
-    fetch("/settimexerox",{
-        method:"POST",
+    fetch("/statusChange",{
+        method:"PUT",
         headers: { "Content-Type": "application/json" },
-        body:JSON.stringify({time:time})
+        body:JSON.stringify({service:'xerox',id:Uid})
     })
     .then(res=>res.json())
     .then(massage=>
@@ -135,8 +139,10 @@ else if(time == 1)
         settime.innerText= status_word,
 
     );
+}
     
 }
+
 const getit = document.getElementById("print_list_history");
 getit.addEventListener("click",getvalue);
 function getvalue()

@@ -348,6 +348,8 @@ app.post("/printed",(req,res)=>{
     }
   })
 })
+
+//below changed
 app.get("/openstatus",(req,res)=>
 {
   let queary = "select xerox from set_active_time where serial = 1";
