@@ -22,19 +22,21 @@ window.onload = function ()
     document.getElementById("show_id").textContent = firstname +" " + lastname;
   }
   )
-  fetch("/activetime")
+  fetch("/statusGet?service=xerox")
   .then(res=>res.json())
-  .then(result=>{
-    if(result.status == 1)
+  .then(data=>{
+    let status=data[0].status;
+    if(status == 'open')
     {
       open_status.style.backgroundColor = "Green";
       open_status.textContent = "Open"
     }
-    if(result.status == 0)
+    if(status == 'closed')
     {
       open_status.style.backgroundColor = "Red";
       open_status.textContent = "Closed"
     }
+    else{console.log("xerox is : "+status);}
   })
 }
 const openBtn = document.getElementById("openPanelBtn");

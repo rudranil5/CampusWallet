@@ -364,6 +364,7 @@ app.get("/openstatus",(req,res)=>
     }
   })
 })
+
 app.post("/settimexerox",(req,res)=>{
   let {time} = req.body;
   let queary = "update set_active_time set xerox = ? where serial = 1 ;"
@@ -408,6 +409,7 @@ app.get("/removeprinted", (req, res) => {
     res.json(result);
   });
 });
+//below changed
 app.get("/activetime", (req, res) => {
   const sql = "SELECT xerox from set_active_time where serial = 1 ";
 
@@ -584,9 +586,11 @@ app.get("/statusGet",(req,res)=>{
   const serviceProvider=req.query.service;
   console.log("Status requested of: ",serviceProvider);
   student_db.query(`select status from services where name='${serviceProvider}'`,(err,data)=>{
+    console.log(data);
     if(err){console.log(`error while checking status of ${serviceProvider} : `+err)}
     else{ return res.json(data);}
   });
+  
 })
 
 app.put("/statusChange",(req,res)=>{
