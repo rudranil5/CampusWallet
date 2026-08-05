@@ -63,9 +63,9 @@ let id="";
    }
 });
 // // Client-side JavaScript
-async function sendData() 
+async function sendData(event) 
 {
-
+event.preventDefault();
 let firstname = document.getElementById("fname").value;
 let lastname =  document.getElementById("lname").value;
 let phone_num = document.getElementById("phone").value;
@@ -118,4 +118,5 @@ const data =
     {
       window.location.href="/login.html";
     }
+    
 }
