@@ -590,15 +590,18 @@ app.get("/statusGet",(req,res)=>{
 })
 
 app.put("/statusChange",(req,res)=>{
-  let {service}=req.body;
+  let {service,id}=req.body;
+  console.log(req.body);
   student_db.query(`update services 
-    set status= case
+    set updaterId=?,
+    status= case
     when status='open' then 'closed'
     else 'open'
     end
-    where name=?`,[service],(err,data)=>{
+    where name=?`,[id,service],(err,data)=>{
       if(err){console.log(`While changing ${service} status : `+err);}
-      else{return res.json({messege:"success"}) ;}
+      else{
+          return res.json({messege:"success"}) ;}
     });
 });
 

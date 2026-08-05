@@ -55,13 +55,18 @@ window.onload=function(){
 };
 
 window.statusChange =function(){
+    let Uid = JSON.parse(sessionStorage.getItem("object"));
     fetch("/statusChange",{
         method:'PUT',
         headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({service:'canteen'})
+        body: JSON.stringify({service:'canteen',id:Uid})
     })
+    .then(res=>res.json())
+    .then(data=>{console.log(data);})
     .then(()=>{
         statusGet();
+        
+        
     })
 };
 
