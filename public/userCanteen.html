@@ -189,31 +189,43 @@ tableBody.appendChild(row);
 
 
 function orderItem(menu_item, menu_cost, menu_id){
-    console.log("Selected:"+menu_id);
-const randomString = Math.random().toString(36).substring(2, 10);
-console.log(randomString); 
-let quant = document.getElementById(menu_id).value;
-
-const data = {
-uid:"908172",
-menuitem: menu_item,
-cost: menu_cost,
-quantity: quant,
-code:randomString
-};
-console.log(data);
-
-fetch("/saveCode",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({data})
-})
+    fetch ('/statusGet?service=canteen')
 .then(res=>res.json())
-.then(data_back=>{
-console.log(data_back.message);
-alert("Order Sent ✅");
+.then(data=>{
+    status=data[0].status;
+    if (status=='closed'){
+        alert("Sorry,Canteen is now Closed , Please try again later");
+
+    }
+    else {
+        console.log("Selected:"+menu_id);
+        const randomString = Math.random().toString(36).substring(2, 10);
+        console.log(randomString); 
+        let quant = document.getElementById(menu_id).value;
+        let Uid = JSON.parse(sessionStorage.getItem("object"));
+        const data = {
+        uid:Uid,
+        menuitem: menu_item,
+        cost: menu_cost,
+        quantity: quant,
+        code:randomString
+        };
+        console.log(data);
+
+        fetch("/saveCode",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({data})
+        })
+        .then(res=>res.json())
+        .then(data_back=>{
+        console.log(data_back.message);
+        alert("Order Sent ✅");
+        })
+        .catch(err=>console.log("Order error:",err));
+    }
 })
-.catch(err=>console.log("Order error:",err));
+
 
 }
 

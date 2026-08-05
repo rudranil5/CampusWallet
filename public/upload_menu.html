@@ -116,8 +116,23 @@
 </div>
 
 <script>
+    window.onload = function(){
+        let itemList=[];
+        fetch("/showmenu")
+        .then(res=>res.json())
+        .then (data=>{
+            console.log(data);
+            data.forEach(item=>{
+                itemList.push(item.items);
+            })
+            document.getElementById('selections').innerHTML=itemList.map(Items => ` <b>○ &nbsp &nbsp </b>${Items}<br> <hr color='black'  width=70%>`).join("");
+        })
+        document.getElementById("confirm_update").innerText="Live Items"
+        document.getElementById("confirm_update").style.display='block'
+    }
     let Items='';
     let itemList=[];
+    //let itemList=[];
     
     let count=0;
     if (Items==''){
@@ -158,6 +173,7 @@
             }
         });
     });
+
     function add(){
         console.log("abbc");
         let newItem="you";
