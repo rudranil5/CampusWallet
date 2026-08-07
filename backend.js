@@ -678,6 +678,22 @@ app.get("/showOrders",(req,res)=>{
 
   })
 })
+app.get("/showOrderStatus",(req,res)=>{
+  id=req.query.service()
+  student_db.query("select item,quantity,time_format(time,'%h:%i %p') as time,status from orders where id=?",[id],(err,data)=>{
+    if(err)
+      {
+        console.log("Cant show orders due to : ",err);
+      }
+    else
+    {
+      
+      return res.json(data);
+    }
+    console.log(data);
+
+  })
+})
 app.get("/showOrderHistory",(req,res)=>{
   student_db.query("select date_format(date,'%d %M, %Y') as date,id,item,quantity,code,status from orderHistory order by date",(err,data)=>{
     console.log("OrderHist-",data);
