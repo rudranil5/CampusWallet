@@ -627,27 +627,33 @@ app.post("/save",(req,res)=>{
     console.log("FUcci");
     const {itemList} = req.body;
     const cost=234;
+    let completed=0;
     let success={};
     console.log("Selected Items  "+itemList);
     student_db.query("delete from Menu",(err,data)=>{
         if(err){console.log("Error: "+err)}
-        else{return res.json("The existing Menu is about to be replaced with New !!!")}
-    });
-    for (let i=0;i<itemList.length;i++){
-        let Item=itemList[i];
-        //let cost=itemList[i];
-        student_db.query("insert into menu (items,cost) values (?,?)",[Item,cost],(err,data)=>{
-        if(err)
-        {
-        console.log("Error:"+err);
-        return err;
-        }
-        
-        });
-    }
-}
+        else{
 
-)
+          for (let i=0;i<itemList.length;i++){
+            let Item=itemList[i];
+            //let cost=itemList[i];
+            student_db.query("insert into menu (items,cost) values (?,?)",[Item,cost],(err,data)=>{
+            if(err)
+            {
+              console.log("Error:"+err);
+              return err;
+            }
+            else{completed++;}
+            if (completed===itemList.length){
+              return res.json("The existing Menu is about to be replaced with New !!!");}
+        
+            });
+          }
+          
+        }
+    });
+    
+})
 
 
 app.get("/showMenu",(req,res)=>{
