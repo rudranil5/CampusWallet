@@ -231,7 +231,65 @@ function orderItem(menu_item, menu_cost, menu_id){
 
 
 }
+indow.showOrder= function(){
+    Uid=JSON.parse(sessionStorage.getItem("object"))
+    fetch ("/showOrderStatus?id=Uid",{
+        method:"GET",
+        headers:{"Content-Type":"application/json"},
+        bodu:JSON.stringify(data)
+    })
+    .then(res=>res,json())
+    .then (data=>{
+        console.log("Got order Updates"+data);
 
+        const tableBody = document.querySelector("#showstatus tbody");
+        tableBody.innerHTML = "";
+
+data.forEach(item => {
+
+const row = document.createElement("tr");
+
+const tdItem = document.createElement("td");
+tdItem.textContent = item.items;
+
+const tdCost = document.createElement("td");
+tdCost.textContent = item.price;
+
+const tdQty = document.createElement("td");
+const qtyInput = document.createElement("input");
+qtyInput.type = "number";
+qtyInput.min = "1";
+qtyInput.id = `qty-${item.items}`;
+tdQty.appendChild(qtyInput);
+
+const tdTime = document.createElement("td");
+const timeInput = document.createElement("input");
+timeInput.type = "text";
+timeInput.placeholder = "1:00 PM";
+tdTime.appendChild(timeInput);
+
+const tdBtn = document.createElement("td");
+const orderBtn = document.createElement("button");
+orderBtn.textContent = "ORDER";
+
+orderBtn.addEventListener("click", ()=>{
+orderItem(item.items, item.price, `qty-${item.items}`);
+});
+
+tdBtn.appendChild(orderBtn);
+
+row.appendChild(tdItem);
+row.appendChild(tdCost);
+row.appendChild(tdQty);
+row.appendChild(tdTime);
+row.appendChild(tdBtn);
+
+tableBody.appendChild(row);
+
+});
+
+    })
+}
 
 
 </script>
