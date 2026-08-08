@@ -57,7 +57,8 @@ window.onload=function(){
 window.statusChange =function(){
     let Uid = JSON.parse(sessionStorage.getItem("object"));
     if (!Uid) {
-    window.location.href = "login.html";}
+    window.location.href = "login.html";
+        return ;}
     else{
 
     fetch("/statusChange",{
