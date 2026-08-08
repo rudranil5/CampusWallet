@@ -58,6 +58,7 @@ window.statusChange =function(){
     let Uid = JSON.parse(sessionStorage.getItem("object"));
     if (!Uid) {
     window.location.href = "login.html";}
+    else{
 
     fetch("/statusChange",{
         method:'PUT',
@@ -71,6 +72,7 @@ window.statusChange =function(){
         
         
     })
+    }
 };
 
 window.statusGet =function(){
