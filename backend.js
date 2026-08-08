@@ -717,6 +717,21 @@ console.log(data);
   })
 })
 
+app.get("/showOrderStatus",(req,res)=>{
+  let Uid=req.query.Uid;
+  console.log("user-id- "+Uid);
+  student_db.query("select item,quantity,cost,time,status,code,(quantity*cost)as totalAmount from orders where id=? ",[Uid],(err,data)=>{
+    if (err){console.log("Unfortunately, cant fetch order status : "+err);}
+    else {
+      console.log("here are the orders "+data)
+      return res.json(data);
+    }
+  })
+
+})
+
+
+
 app.use(express.static(path.join(__dirname, "public")));
 
 let PORT = process.env.PORT || 3000;

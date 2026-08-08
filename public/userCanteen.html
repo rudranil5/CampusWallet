@@ -89,8 +89,36 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 </tbody>
 </table>
 
+
+<BR>
+<BR>
+<HR>
+<HR>  <BR>  
+<h2>YOUR ORDERS</h2>
+
+<table id="showstatus">
+<thead>
+<tr>
+<th>ORDERED ITEMs</th>
+<th>PRICE</th>
+<th>Quantity</th>
+<th>TIME</th>
+<th>STATUS</th>
+<th>CODE</th>
+<th>TOTAL AMOUNT</th>
+<th>PAY </th>
+</tr>
+</thead>
+
+<tbody>
+</tbody>
+</table>
+
+
+
 </div>
 </div>
+
 
 <!-- ================= SCRIPT ================= -->
 
@@ -124,6 +152,7 @@ window.onload = function(){
         }
         })
         document.getElementById('canteen-status').innerHTML=(`${status2} <b>${status}</b>`);
+        showOrder(); //not working
         
         
     })
@@ -231,57 +260,57 @@ function orderItem(menu_item, menu_cost, menu_id){
 
 
 }
-indow.showOrder= function(){
-    Uid=JSON.parse(sessionStorage.getItem("object"))
-    fetch ("/showOrderStatus?id=Uid",{
-        method:"GET",
-        headers:{"Content-Type":"application/json"},
-        bodu:JSON.stringify(data)
-    })
-    .then(res=>res,json())
+window.showOrder= function(){
+    let Userid=JSON.parse(sessionStorage.getItem("object"))
+    fetch (`/showOrderStatus?Uid=${Userid}`)
+    .then(res=>res.json())
     .then (data=>{
-        console.log("Got order Updates"+data);
+        console.log("Got order Updates"+{data});
 
         const tableBody = document.querySelector("#showstatus tbody");
         tableBody.innerHTML = "";
 
-data.forEach(item => {
+data.forEach(order => {
 
 const row = document.createElement("tr");
 
 const tdItem = document.createElement("td");
-tdItem.textContent = item.items;
+tdItem.textContent = order.item;
 
 const tdCost = document.createElement("td");
-tdCost.textContent = item.price;
+tdCost.textContent = order.cost;
 
 const tdQty = document.createElement("td");
-const qtyInput = document.createElement("input");
-qtyInput.type = "number";
-qtyInput.min = "1";
-qtyInput.id = `qty-${item.items}`;
-tdQty.appendChild(qtyInput);
+tdQty.textContent= order.quantity;
 
 const tdTime = document.createElement("td");
-const timeInput = document.createElement("input");
-timeInput.type = "text";
-timeInput.placeholder = "1:00 PM";
-tdTime.appendChild(timeInput);
+tdTime.textContent= order.time;
+
+const tdStatus = document.createElement("td");
+tdStatus.textContent= order.status;
+
+const tdCode = document.createElement("td");
+tdCode.textContent= order.code;
+
+const tdAmount = document.createElement("td");
+tdAmount.textContent= order.totalAmount;
+
 
 const tdBtn = document.createElement("td");
-const orderBtn = document.createElement("button");
-orderBtn.textContent = "ORDER";
+const PayBtn = document.createElement("button");
+PayBtn.textContent = "Pay Now";
 
-orderBtn.addEventListener("click", ()=>{
-orderItem(item.items, item.price, `qty-${item.items}`);
-});
+PayBtn.addEventListener("click", ()=>{});
 
-tdBtn.appendChild(orderBtn);
+tdBtn.appendChild(PayBtn);
 
 row.appendChild(tdItem);
 row.appendChild(tdCost);
 row.appendChild(tdQty);
 row.appendChild(tdTime);
+row.appendChild(tdStatus);
+row.appendChild(tdCode);
+row.appendChild(tdAmount);
 row.appendChild(tdBtn);
 
 tableBody.appendChild(row);
