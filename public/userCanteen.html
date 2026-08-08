@@ -253,6 +253,7 @@ function orderItem(menu_item, menu_cost, menu_id){
         .then(data_back=>{
         console.log(data_back.message);
         alert("Order Sent ✅");
+        window.location.reload();
         })
         .catch(err=>console.log("Order error:",err));
     }
