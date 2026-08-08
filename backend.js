@@ -8,12 +8,15 @@ const isProd = process.env.NODE_ENV === "production";
 
 app.use(express.json());
 app.use(express.static("public"));
-const student_db = database.createConnection({
+const student_db = database.createPool({
   host: process.env.DHost,
   user: process.env.DUsername,
   password: process.env.DPassword,
   database: process.env.DDatabase,
   port:process.env.DPORT,
+  waitForConnections:true,
+  connectionLimit:10,
+  queueLimit:0,
    ...(isProd && {ssl: {
         ca: fs.readFileSync(
             path.join(__dirname, "isrgrootx1.pem")
