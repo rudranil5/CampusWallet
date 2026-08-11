@@ -22,8 +22,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
     <div class="nav-right">
         <a href="Canteen-service.html">Dashboard</a>
-        <a href="#"><i class="fa-solid fa-bell"></i></a>
-        <a href="#"><i class="fa-regular fa-user"></i></a>
+        <button id="telegram"> Telegram <i class="fa-solid fa-bell"></i></button>
+        <button class="profile"  id="openPanelBtn" ><i class="fa-regular fa-user">👤</i></button>
     </div>
 </header>
 
@@ -125,6 +125,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <script>
 
 window.onload = function(){
+
+    tgstatus();
+           
 
     let status='';
     let status2='';
@@ -252,7 +255,7 @@ function orderItem(menu_item, menu_cost, menu_id){
         .then(res=>res.json())
         .then(data_back=>{
         console.log(data_back.message);
-        alert("Order Sent ✅");
+        alert("Order Sent ✅  . Please stay connected to telegram to recieve order updates");
         window.location.reload();
         })
         .catch(err=>console.log("Order error:",err));
@@ -321,6 +324,37 @@ tableBody.appendChild(row);
     })
 }
 
+window.tgstatus= function() {
+let Uid = JSON.parse(sessionStorage.getItem("object"));
+    if (!Uid){
+            window.location.href="login.html";
+        }
+    const tg=document.getElementById("telegram")
+    fetch(`/tgload?Uid=${Uid}`)
+    .then(res=>res.json())
+    .then(data=>{
+        if (data.status===true){
+            if (data.Username.length===0){ tg.innerText=("Connected:NO Username")}
+            else{tg.innerText=(`Connected:${data.Username}`);}
+            tg.addEventListener("click",()=>{
+                window.location.href=`https://t.me/Rudranil_TelegramBot`
+        
+            })   
+        }
+        else if (data.status===false){
+            if (data.reason==='not connected'){
+                tg.innerText=("Connect Telegram")
+                tg.addEventListener("click",()=>{
+                window.location.href=`https://t.me/Rudranil_TelegramBot?start=${Uid}`
+        
+            })   
+            }
+            else{console.log("Database Error")}
+        }
+
+    })
+
+}
 
 </script>
 
