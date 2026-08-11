@@ -3,6 +3,9 @@ const database = require("mysql2");
 const fs = require("fs");
 const path = require("path");
 require("dotenv").config();
+
+const bot = require('./telegramConnect');
+
 const app = express();
 const isProd = process.env.NODE_ENV === "production";
 
@@ -723,10 +726,29 @@ app.get("/showOrderStatus",(req,res)=>{
   student_db.query("select item,quantity,cost,time,status,code,(quantity*cost)as totalAmount from orders where id=? ",[Uid],(err,data)=>{
     if (err){console.log("Unfortunately, cant fetch order status : "+err);}
     else {
-      console.log("here are the orders "+data)
+      console.log("here are the orders "+{data})
       return res.json(data);
     }
   })
+
+})
+
+app.get("/tgload",(req,res)=>{
+    let Uid=req.query.Uid;
+    student_db.query(`select userid,tgusername from tgdetails where userid=?`,[Uid],(err,data)=>{
+      if (err){console.log("cant verify telegram details due to : ",err);
+                return res.status(500).json({status:false,reason:'error'});
+      }
+      else {
+        if (data.length===0)
+          {return res.json({status:false,reason:'not connected'});}
+        else{ 
+          const username=data[0].tgusername;
+          return res.json({status:true,Username:username});
+        }
+      }
+    })
+
 
 })
 
