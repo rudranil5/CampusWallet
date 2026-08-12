@@ -344,16 +344,47 @@ let Uid = JSON.parse(sessionStorage.getItem("object"));
         else if (data.status===false){
             if (data.reason==='not connected'){
                 tg.innerText=("Connect Telegram")
-                tg.addEventListener("click",()=>{
-                window.location.href=`https://t.me/Rudranil_TelegramBot?start=${Uid}`
-        
-            })   
+                tg.addEventListener("click", connectTelegram);
             }
             else{console.log("Database Error")}
         }
 
     })
 
+}
+
+window.connectTelegram = function () {
+
+    let Uid = JSON.parse(sessionStorage.getItem("object"));
+
+    if (!Uid) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    
+    let code = '76999';
+
+    fetch("/tgsub", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            Uid: Uid,
+            code: code
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        if (data.status === "waiting") {
+            window.location.href =
+                `https://t.me/Rudranil_TelegramBot?start=${code}`;
+        }
+
+    })
+    .catch(err => console.log("Telegram connection error:", err));
 }
 
 </script>
