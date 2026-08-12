@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 require("dotenv").config();
 
-const bot = require('./telegramConnect');
+const {bot,starttgListener} = require('./telegramConnect');
 
 const app = express();
 const isProd = process.env.NODE_ENV === "production";
@@ -752,7 +752,36 @@ app.get("/tgload",(req,res)=>{
 
 })
 
+app.post("/tgsub", (req, res) => {
 
+    const { Uid, code } = req.body;
+
+    starttgListener((data) => {
+
+        if (String(code) !== String(data.code)) {
+            return;
+        }
+
+        student_db.query(
+            "insert into tgdetails values (?,?,?)",
+            [Uid, data.username, data.chatId],
+            (err, result) => {
+
+                if (err) {
+                    console.log("telegram connection failed : " + err);
+                    return;
+                }
+
+                bot.sendMessage(
+                    data.chatId,
+                    `Hello ${data.firstname}! 👋\n\nYour Telegram notifications are now enabled for Campus Wallet! 🔔 Your Campus Wallet ID is ${Uid}`
+                );
+            }
+        );
+    });
+
+    return res.json({ status: "waiting" });
+});
 
 app.use(express.static(path.join(__dirname, "public")));
 
