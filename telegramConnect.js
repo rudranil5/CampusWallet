@@ -1,4 +1,4 @@
-console.log("🔥 TELEGRAM FILE LOADED");
+console.log(" TELEGRAM FILE LOADED");
 console.log(__filename);
 
 const { TelegramBot } = require('node-telegram-bot-api');
