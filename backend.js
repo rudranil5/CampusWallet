@@ -73,7 +73,7 @@ app.post("/register", (req, res) => {
    (err, result) => {
       if (err) {
         console.log(err);
-        if (err.sqlMessage==="Duplicate entry '?' for key 'details.PRIMARY'")
+        if (err.code === 'ER_DUP_ENTRY')
         {
           return res.json({message:"Id already Registered"});
         }
