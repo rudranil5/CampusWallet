@@ -115,7 +115,7 @@ const data =
           alert(`THE ID ${id} is already registered with us. Kindly contact Admins if you think this is a mistake.🥲`);
           return;
         }
-        else if (result.messege==="Database error"){alert("Oops , Something Went Wrong, Please try agail later");}
+        else if (result.messege==="Database error"){alert("Oops , Something Went Wrong, Please try again later");}
     } catch (error) {
         console.error("Error:", error);
     }
