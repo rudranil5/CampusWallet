@@ -115,9 +115,12 @@ const data =
           alert(`THE ID ${id} is already registered with us. Kindly contact Admins if you think this is a mistake.🥲`);
           return;
         }
-        else if (result.messege==="Database error"){alert("Oops , Something Went Wrong, Please try again later");}
+        else if (result.message==="Database error"){alert("Oops , Something Went Wrong, Please try again later");
+          return
+        }
     } catch (error) {
         console.error("Error:", error);
+        alert("Could not reach the server. Please check your connection.");
     }
     
 
