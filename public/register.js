@@ -108,12 +108,19 @@ const data =
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         });
-
+        
         const result = await response.json();
         console.log("Server response:", result.message);
+        if (result.message==='Id already Registered'){
+          alert(`THE ID ${id} is already registered with us. Kindly contact Admins if you think this is a mistake.🥲`);
+          return;
+        }
+        else if (result.messege==="Database error"){alert("Oops , Something Went Wrong, Please try agail later");}
     } catch (error) {
         console.error("Error:", error);
     }
+    
+
     if(firstname.length != 0 && lastname.length !=0  && password.length != 0 && id != 0)
     {
       window.location.href="/login.html";
