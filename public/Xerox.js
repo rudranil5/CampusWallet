@@ -55,7 +55,7 @@ window.onload = function ()
                 const row = document.createElement("tr");
                 row.innerHTML = `
                     <td>${item.id}</td>
-                    <td>${item.firstname+" "+item.firstname}</td>
+                    <td>${item.firstname+" "+item.lastname}</td>
                     <td>${item.phone_number}</td>
                     <td>${item.message}</td>
                     <td>
