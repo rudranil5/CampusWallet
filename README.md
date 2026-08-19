@@ -97,3 +97,5 @@ CREATE TABLE `servicelog` (
   `updaterId` varchar(20) DEFAULT NULL,
   `time` timestamp NULL DEFAULT (CURRENT_TIMESTAMP)
 );
+
+check the live website on https://campuswallet.onrender.com
