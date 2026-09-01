@@ -98,4 +98,4 @@ CREATE TABLE `servicelog` (
   `time` timestamp NULL DEFAULT (CURRENT_TIMESTAMP)
 );
 
-check the live website on https://campuswallet.onrender.com
+check the live website on https://campuswallet.onrender.com/homepage.html
